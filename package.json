@@ -4,18 +4,20 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.js",
+    "dev": "vike dev",
+    "build": "tsc -b && vike build && node scripts/inline-css.js",
     "lint": "oxlint",
-    "preview": "vite preview",
-    "watch": "vite build --watch"
+    "preview": "vike preview",
+    "watch": "node scripts/watch.js"
   },
   "dependencies": {
     "@fontsource-variable/montserrat": "^5.3.0",
     "photoswipe": "^5.4.4",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "swiper": "^14.3.0"
+    "swiper": "^14.3.0",
+    "vike": "^0.4.268",
+    "vike-react": "^0.6.31"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",

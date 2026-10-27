@@ -6,10 +6,10 @@
 
 ```bash
 npm install
-npm run dev      # dev-сервер с HMR
-npm run watch    # vite build --watch — пересборка dist/ при изменениях
-npm run build    # проверка типов + production-сборка + пререндер HTML
-npm run preview  # просмотр dist/
+npm run dev      # dev-сервер Vike с HMR
+npm run watch    # пересборка dist/client/ при изменениях в src/ и pages/
+npm run build    # проверка типов + сборка + пререндер HTML (Vike) → dist/client/
+npm run preview  # просмотр собранного dist/client/
 ```
 
 ## Что где
@@ -27,7 +27,8 @@ npm run preview  # просмотр dist/
 
 ## Производительность
 
-- HTML пререндерится при сборке (`src/entry-server.tsx` + `scripts/prerender.js`), клиент гидрирует. Десктопная и мобильная версии обе в разметке, видимую выбирает CSS — без мигания до гидрации.
-- CSS встроен в `index.html`, шрифт Montserrat (вариативный, `@fontsource-variable`) свой, с `preload` — плагин `inlineCss` в `vite.config.ts`.
+- Пререндер и гидрация — [Vike](https://vike.dev) + `vike-react` (`pages/+config.ts`: `prerender: true`). Статика для деплоя — `dist/client/`.
+- Десктопная и мобильная версии обе в разметке, видимую выбирает CSS — без мигания до гидрации.
+- CSS встраивается в HTML после сборки (`scripts/inline-css.js`) — нет блокирующих запросов. Шрифт Montserrat свой (вариативный, только кириллица и латиница, `@font-face` в `src/index.css`), preload Vike добавляет сам.
 - Первое фото грузится сразу с `fetchpriority="high"`, остальные — лениво.
 - На хостинге стоит отдавать `/assets/*` с `Cache-Control: public, max-age=31536000, immutable` (имена с хешем).
