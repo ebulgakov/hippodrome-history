@@ -20,8 +20,9 @@ export function useLightbox(gallery: RefObject<HTMLElement | null>, onChange?: (
       children: 'a[data-pswp-width]',
       pswpModule: () => import('photoswipe'),
       bgOpacity: 0.92,
-      showHideAnimationType: 'zoom',
+      showHideAnimationType: 'fade',
     })
+    lightbox.addFilter('useContentPlaceholder', () => false)
     lightbox.on('change', () => {
       if (lightbox.pswp) onChangeRef.current?.(lightbox.pswp.currIndex)
     })
