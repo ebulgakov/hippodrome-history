@@ -5,11 +5,11 @@
 Стек: Vite + React + TypeScript, Tailwind CSS v4, Swiper (слайдер), PhotoSwipe (лайтбокс). Шрифт Montserrat (Google Fonts).
 
 ```bash
-npm install
-npm run dev      # dev-сервер с HMR
-npm run watch    # vite build --watch — пересборка dist/ при изменениях
-npm run build    # проверка типов + production-сборка
-npm run preview  # просмотр dist/
+pnpm install
+pnpm run dev      # dev-сервер с HMR
+pnpm run watch    # vite build --watch — пересборка dist/ при изменениях
+pnpm run build    # проверка типов + production-сборка
+pnpm run preview  # просмотр dist/
 ```
 
 ## Что где
