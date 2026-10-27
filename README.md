@@ -1,5 +1,7 @@
 # История Московского ипподрома
 
+<img width="2800" height="1764" alt="image" src="https://github.com/user-attachments/assets/42b80262-71e2-45fb-8b1f-7dd8722878b1" />
+
 Стек: Vite + React + TypeScript, Tailwind CSS v4, Swiper (слайдер), PhotoSwipe (лайтбокс). Шрифт Montserrat (Google Fonts).
 
 ```bash
