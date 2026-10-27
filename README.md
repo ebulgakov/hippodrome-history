@@ -15,7 +15,7 @@ pnpm run preview  # просмотр dist/
 ## Что где
 
 - `src/data.ts` — пункты истории (тексты, фото, размеры для лайтбокса).
-- `src/components/HistoryList.tsx`, `HistoryCard.tsx` — десктоп (≥1024px): зигзаг, анимация при попадании во вьюпорт (`useInView` + CSS-переходы в `index.css`): рамка докручивается вокруг оси, фото чередует zoomOut / fadeIn, текст выезжает снизу.
+- `src/components/HistoryList.tsx`, `HistoryCard.tsx` — десктоп (≥1024px): зигзаг, анимация при попадании во вьюпорт (`useInView` + CSS-переходы в `index.css`): рамка докручивается вокруг оси, фото проявляется с zoomOut, текст выезжает снизу.
 - `src/components/HistorySlider.tsx` — мобильный слайдер на Swiper: свайп, стрелки, точки-индикатор.
 - `src/components/RoundImage.tsx` — круглое превью (кольцо и диск на CSS, орнамент из PSD) — ссылка на полноразмерное фото для PhotoSwipe.
 - `src/components/HorsesStrip.tsx` — лента лошадей: CSS `animation-timeline: scroll(root)`, в браузерах без scroll-driven animations — JS-фолбэк через `--progress`.

@@ -15,7 +15,7 @@ export function HistoryCard({ item, index }: Props) {
   return (
     <article
       ref={ref}
-      data-reveal={index % 2 === 0 ? 'zoom' : 'fade'}
+      data-reveal
       data-inview={inView || undefined}
       className={`grid items-center gap-x-[66px] ${reversed ? 'grid-cols-[445px_382px]' : 'grid-cols-[382px_445px]'}`}
     >
