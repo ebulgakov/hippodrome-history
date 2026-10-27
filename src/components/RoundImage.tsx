@@ -1,4 +1,4 @@
-import frame from '../assets/frame.png'
+import frame from '../assets/frame.webp'
 import type { HistoryItem } from '../data'
 import { fullPhoto, thumbPhoto } from '../photos'
 
@@ -9,13 +9,15 @@ const PHOTO_MOBILE = 190
 type Props = {
   item: HistoryItem
   className?: string
+  /** Первое фото на экране: грузить сразу и с высоким приоритетом */
+  priority?: boolean
 }
 
 /**
  * Круглое превью: контур, золотой диск, орнаментальная рамка и фото.
  * Пропорции сняты с макета (внешний круг 382px).
  */
-export function RoundImage({ item, className = '' }: Props) {
+export function RoundImage({ item, className = '', priority = false }: Props) {
   const full = fullPhoto(item)
   const { desktop, ...thumb } = thumbPhoto(item, PHOTO_MOBILE, PHOTO_DESKTOP)
 
@@ -35,8 +37,10 @@ export function RoundImage({ item, className = '' }: Props) {
       <img
         src={frame}
         alt=""
+        width={337}
+        height={337}
         draggable={false}
-        className="reveal-frame absolute inset-[6.4%] size-[87.2%] select-none"
+        className="reveal-frame absolute inset-[5.9%] size-[88.2%] select-none"
       />
       <span className="absolute inset-[17.4%] overflow-hidden rounded-full bg-ink/20">
         <picture>
@@ -47,7 +51,8 @@ export function RoundImage({ item, className = '' }: Props) {
             height={PHOTO_MOBILE}
             alt={item.title}
             draggable={false}
-            loading="lazy"
+            loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : 'auto'}
             className="reveal-photo size-full select-none object-cover"
           />
         </picture>

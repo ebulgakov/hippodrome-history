@@ -19,7 +19,7 @@ export function HistoryCard({ item, index }: Props) {
       data-inview={inView || undefined}
       className={`grid items-center gap-x-[66px] ${reversed ? 'grid-cols-[445px_382px]' : 'grid-cols-[382px_445px]'}`}
     >
-      <RoundImage item={item} className={`w-[382px] ${reversed ? 'order-2' : ''}`} />
+      <RoundImage item={item} priority={index === 0} className={`w-[382px] ${reversed ? 'order-2' : ''}`} />
       <div className="reveal-text">
         <h3 className="mb-4 text-[36px] leading-tight font-extrabold tracking-wide text-brick uppercase">
           {item.title}

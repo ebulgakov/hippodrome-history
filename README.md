@@ -8,7 +8,7 @@
 npm install
 npm run dev      # dev-сервер с HMR
 npm run watch    # vite build --watch — пересборка dist/ при изменениях
-npm run build    # проверка типов + production-сборка
+npm run build    # проверка типов + production-сборка + пререндер HTML
 npm run preview  # просмотр dist/
 ```
 
@@ -24,3 +24,10 @@ npm run preview  # просмотр dist/
 Ассеты: `src/assets/frame.png`, `horses.png` вырезаны из PSD.
 
 Фото хранятся на imgix. Папка задаётся в `.env.local` (шаблон — `.env.example`): `VITE_IMGIX_BASE=https://xxx.imgix.net/assets_m24/`, файлы `1.jpg` … `6.jpg`. В `src/photos.ts` строятся URL: превью — `<picture>` с квадратным кропом под диаметр круга (249px на десктопе, 190px на мобильном) и плотностями 1x/2x/3x, `auto=format,compress`; лайтбокс получает `srcset` по ширинам.
+
+## Производительность
+
+- HTML пререндерится при сборке (`src/entry-server.tsx` + `scripts/prerender.js`), клиент гидрирует. Десктопная и мобильная версии обе в разметке, видимую выбирает CSS — без мигания до гидрации.
+- CSS встроен в `index.html`, шрифт Montserrat (вариативный, `@fontsource-variable`) свой, с `preload` — плагин `inlineCss` в `vite.config.ts`.
+- Первое фото грузится сразу с `fetchpriority="high"`, остальные — лениво.
+- На хостинге стоит отдавать `/assets/*` с `Cache-Control: public, max-age=31536000, immutable` (имена с хешем).

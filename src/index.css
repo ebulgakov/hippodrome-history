@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import '@fontsource-variable/montserrat/wght.css';
 
 @theme {
   --color-sand: #d2b877;
@@ -6,7 +7,7 @@
   --color-brick: #8c472b;
   --color-ink: #5c341d;
   --color-horse: #e8dcc9;
-  --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Montserrat Variable', ui-sans-serif, system-ui, sans-serif;
 }
 
 body {

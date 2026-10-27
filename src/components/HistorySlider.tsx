@@ -37,9 +37,9 @@ export function HistorySlider() {
         spaceBetween={24}
         a11y={{ prevSlideMessage: 'Предыдущий слайд', nextSlideMessage: 'Следующий слайд' }}
       >
-        {history.map((item) => (
+        {history.map((item, i) => (
           <SwiperSlide key={item.id} className="px-5 text-center">
-            <RoundImage item={item} className="mx-auto w-[291px]" />
+            <RoundImage item={item} priority={i === 0} className="mx-auto w-[291px]" />
             <h3 className="mt-7 mb-2 text-2xl font-extrabold tracking-wide text-brick uppercase">{item.title}</h3>
             <p className="text-lg leading-[1.45] font-medium">{item.text}</p>
           </SwiperSlide>
