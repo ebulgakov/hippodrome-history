@@ -22,7 +22,7 @@ export function useLightbox(gallery: RefObject<HTMLElement | null>, onChange?: (
       bgOpacity: 0.92,
       showHideAnimationType: 'fade',
     })
-    lightbox.addFilter('useContentPlaceholder', () => false)
+    lightbox.addFilter('placeholderSrc', () => false)
     lightbox.on('change', () => {
       if (lightbox.pswp) onChangeRef.current?.(lightbox.pswp.currIndex)
     })
