@@ -1,0 +1,24 @@
+# История Московского ипподрома
+
+Стек: Vite + React + TypeScript, Tailwind CSS v4, Swiper (слайдер), PhotoSwipe (лайтбокс). Шрифт Montserrat (Google Fonts).
+
+```bash
+npm install
+npm run dev      # dev-сервер с HMR
+npm run watch    # vite build --watch — пересборка dist/ при изменениях
+npm run build    # проверка типов + production-сборка
+npm run preview  # просмотр dist/
+```
+
+## Что где
+
+- `src/data.ts` — пункты истории (тексты, фото, размеры для лайтбокса).
+- `src/components/HistoryList.tsx`, `HistoryCard.tsx` — десктоп (≥1024px): зигзаг, анимация при попадании во вьюпорт (`useInView` + CSS-переходы в `index.css`): рамка докручивается вокруг оси, фото чередует zoomOut / fadeIn, текст выезжает снизу.
+- `src/components/HistorySlider.tsx` — мобильный слайдер на Swiper: свайп, стрелки, точки-индикатор.
+- `src/components/RoundImage.tsx` — круглое превью (кольцо и диск на CSS, орнамент из PSD) — ссылка на полноразмерное фото для PhotoSwipe.
+- `src/components/HorsesStrip.tsx` — лента лошадей: CSS `animation-timeline: scroll(root)`, в браузерах без scroll-driven animations — JS-фолбэк через `--progress`.
+- `prefers-reduced-motion` отключает анимации.
+
+Ассеты: `src/assets/frame.png`, `horses.png` вырезаны из PSD.
+
+Фото хранятся на imgix. Папка задаётся в `.env.local` (шаблон — `.env.example`): `VITE_IMGIX_BASE=https://xxx.imgix.net/assets_m24/`, файлы `1.jpg` … `6.jpg`. В `src/photos.ts` строятся URL: превью — `<picture>` с квадратным кропом под диаметр круга (249px на десктопе, 190px на мобильном) и плотностями 1x/2x/3x, `auto=format,compress`; лайтбокс получает `srcset` по ширинам.

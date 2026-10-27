@@ -1,0 +1,91 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-sand: #d2b877;
+  --color-disc: #ceac66;
+  --color-brick: #8c472b;
+  --color-ink: #5c341d;
+  --color-horse: #e8dcc9;
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  @apply bg-sand font-sans text-ink antialiased;
+}
+
+/* ---------- Лента лошадей: scroll-driven ---------- */
+
+.horses {
+  --tile: 1662px;
+  /* за сколько пикселей прокрутки лента проходит один тайл */
+  --run: 700px;
+  background: url('./assets/horses.png') repeat-x 0 0 / var(--tile) 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .horses {
+      animation: horses-run linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0px var(--run);
+    }
+  }
+
+  /* Фолбэк: прогресс прокрутки пишет JS в --progress */
+  @supports not (animation-timeline: scroll()) {
+    .horses {
+      background-position-x: calc(var(--progress, 0) * var(--tile));
+    }
+  }
+}
+
+@keyframes horses-run {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: var(--tile);
+  }
+}
+
+/* ---------- Появление карточек ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] .reveal-frame {
+    opacity: 0;
+    transform: rotate(-150deg) scale(0.85);
+    transition:
+      opacity 0.8s ease-out,
+      transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  [data-reveal] .reveal-photo {
+    opacity: 0;
+    transition:
+      opacity 1s ease-out 0.3s,
+      transform 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+  }
+
+  [data-reveal='zoom'] .reveal-photo {
+    transform: scale(1.4);
+  }
+
+  [data-reveal] .reveal-text {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.8s ease-out 0.5s,
+      transform 0.8s ease-out 0.5s;
+  }
+
+  [data-reveal][data-inview] :is(.reveal-frame, .reveal-photo, .reveal-text) {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Лайтбокс ---------- */
+
+.pswp {
+  --pswp-bg: #2b1a0e;
+}
