@@ -21,6 +21,6 @@ pnpm run preview  # просмотр dist/
 - `src/components/HorsesStrip.tsx` — лента лошадей: CSS `animation-timeline: scroll(root)`, в браузерах без scroll-driven animations — JS-фолбэк через `--progress`.
 - `prefers-reduced-motion` отключает анимации.
 
-Ассеты: `src/assets/frame.png`, `horses.png` вырезаны из PSD.
+Ассеты: `src/assets/frame.png`, `horses.png` вырезаны из PSD. И оптимизированы для web. Использование webp, в данном случае, не выгодно. Для примера `src/assets/frame.png` ~11kb, а `src/assets/frame.webp` ~15kb
 
 Фото хранятся на imgix. Папка задаётся в `.env.local` (шаблон — `.env.example`): `VITE_IMGIX_BASE=https://xxx.imgix.net/assets_m24/`, файлы `1.jpg` … `6.jpg`. В `src/photos.ts` строятся URL: превью — `<picture>` с квадратным кропом под диаметр круга (249px на десктопе, 190px на мобильном) и плотностями 1x/2x/3x, `auto=format,compress`; лайтбокс получает `srcset` по ширинам.
